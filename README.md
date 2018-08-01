@@ -176,6 +176,8 @@ Create a new User by signing up within the browser at `localhost:3000` and be su
 
 For this tutorial, my subdomain will be `webcrunch`.
 
+======
+
 Follow the rest of the tutorial here: [https://web-crunch.com/lets-build-with-ruby-on-rails-multitenancy-workout-tracker-app/](https://web-crunch.com/lets-build-with-ruby-on-rails-multitenancy-workout-tracker-app/)
 
 
