@@ -1,0 +1,14 @@
+<div class="column is-4">
+  <div class="pa4 border border-radius-3">
+    <%= link_to workout do %><h3 class="subtitle is-4"><%= workout.title %></h3><% end %>
+    <p><%= verbose_date(workout.date) %></p>
+
+    <% if workout_author(workout) %>
+      <div class="mt4">
+        <%= link_to 'Edit Workout', edit_workout_path(workout), class: 'button' %>
+        <%= link_to 'Delete', workout, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

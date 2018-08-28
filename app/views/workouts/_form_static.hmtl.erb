@@ -1,0 +1,42 @@
+<%#=
+  just for reference! If you wanted to do the nested fields without Vue JS you totally could. This is what the html would look like. There's a nifty simple_fields_for sub-form of sorts at your disposal with SimpleForm. While this method works you still need a mechanism to dynamically append new sub fields on the page as you create each new nested form. Vue JS takes care of that well OR there's a gem called Cacoon that uses jQuery to do something similar.
+ %>
+<%= simple_form_for @workout do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="field">
+      <div class="control">
+        <%= f.input :title, required: true, autofocus: true, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+      </div>
+    </div>
+
+     <div class="field">
+      <div class="control">
+        <%= f.input :date, as: :date, required: true, wrapper: false, label_html: { class: "label" } %>
+      </div>
+    </div>
+
+    <%= f.simple_fields_for :exercises do | exercise | %>
+      <div class="field">
+        <div class="control">
+          <%= exercise.input :name, required: true,  input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <%= exercise.input :sets, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <%= exercise.input :weight, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" } %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= f.button :submit, class: "button is-dark mt3" %>
+
+  <% end %>
+  </div>
+</div>

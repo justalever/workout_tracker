@@ -1,0 +1,72 @@
+<%= content_tag :div,
+  id: "workout-form",
+  data: {
+    id: workout.id,
+    workout: workout.to_json(except: [:id, :created_at, :updated_at]),
+    exercises_attributes: workout.exercises.to_json(except: [:workout_id, :created_at, :updated_at]),
+  } do %>
+
+  <div class="field">
+    <div class="control">
+      <label class="label">Workout Title</label>
+      <input type="text" class="input" v-model="workout.title" />
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <label class="label">Date</label>
+      <input type="date" class="input" v-model="workout.date" />
+    </div>
+  </div>
+
+  <h4 class="title is-4 mt3">Exercises</h4>
+  <div v-for="(exercise, index) in workout.exercises_attributes">
+    <div v-if="exercise._destroy == '1'">
+      {{ exercise.name }} will be removed. <button v-on:click="undoRemove(index)" class="button is-light">Undo</button>
+    </div>
+    <div v-else>
+      <div class="pa4 bg-light border-radius-3 border">
+
+        <div class="field">
+          <div class="control">
+            <label class="label">Exercise Name</label>
+            <input type="text" v-model="exercise.name" class="input" />
+          </div>
+        </div>
+
+        <div class="columns">
+
+          <div class="column">
+            <div class="field">
+              <div class="control">
+                <label class="label">Sets</label>
+                <input type="text" v-model="exercise.sets" class="input" />
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <div class="control">
+                <label class="label">Weight</label>
+                <input type="text" v-model="exercise.weight" class="input" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button v-on:click="removeExercise(index)" class="button is-danger">Remove</button>
+
+      </div>
+    </div>
+
+    <hr />
+  </div>
+
+  <button v-on:click="addExercise" class="button is-dark">Add Exercise</button>
+
+  <hr />
+  <button v-on:click="saveWorkout" class="button is-success is-large mt4">Save Workout</button>
+<% end %>

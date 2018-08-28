@@ -5,11 +5,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'workouts' %>
   </head>
 
   <body class="<%= yield (:body_class) %>">
@@ -39,6 +39,7 @@
 
       <div id="navbar" class="navbar-menu">
         <div class="navbar-end">
+          <div class="navbar-item"><%= link_to 'Create new Workout', new_workout_path, class: 'button is-dark' if user_signed_in? %></div>
           <div class="navbar-item">
             <div class="field is-grouped">
             <% if user_signed_in? %>
@@ -51,35 +52,29 @@
                 </div>
               </div>
             <% else %>
-            <p class="control">
-              <%= link_to "Sign In", new_user_session_path, class:"navbar-item button" %>
-            </p>
+
+            <% if has_subdomain || verify_subdomain_presence %>
+              <p class="control">
+                <%= link_to "Sign In", new_user_session_path, class:"navbar-item button" %>
+              </p>
+            <% end %>
             <p class="control">
               <%= link_to "Sign up", new_user_registration_path, class:"navbar-item button"%>
             </p>
             <% end %>
-
           </div>
         </div>
       </div>
     </div>
   </nav>
 
+  <%= yield :hero %>
+
   <section class="section">
     <div class="container">
       <%= yield %>
     </div>
   </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">
-        <p>
-        Visit <a href="https://web-crunch.com" target="_blank">Web-Crunch.com</a> for more builds like this one.
-        </p>
-      </div>
-    </div>
-  </footer>
 
   </body>
 </html>

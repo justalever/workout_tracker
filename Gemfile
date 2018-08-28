@@ -65,6 +65,9 @@ gem 'devise'
 gem 'bulma-rails'
 gem 'simple_form'
 gem 'sidekiq'
+gem 'apartment'
+gem 'webpacker', '~> 3.5'
+
 group :development, :test do
   gem 'better_errors'
   gem 'guard'

@@ -1,0 +1,7 @@
+<h1 class="title is-3">Workouts</h1>
+
+<div class="columns is-multiline">
+  <% @workouts.each do |workout| %>
+    <%= render "workout", workout: workout %>
+  <% end %>
+</div>
